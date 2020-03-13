@@ -145,25 +145,102 @@ void greet(void)
 // (i.e., fills 2D array with values but does not actually print them)
 void init(void)
 {
-    // TODO
+    for (int i = 0; i < d; i++)
+    {
+        for (int j = 0; j < d; j++)
+        {
+            board[i][j] = d * d - 1 - i * d - j;
+        }
+        
+    }
+    if (d % 2 == 0)
+    {
+        board[d - 1][d - 3] = 1;
+        board[d - 1][d - 2] = 2;
+    }
+    
 }
 
 // Prints the board in its current state
 void draw(void)
 {
-    // TODO
+    for (int i = 0; i < d; i++)
+    {
+        for (int j = 0; j < d; j++)
+        {
+            printf("%d ", board[i][j]);
+        }
+        printf("\n");
+    }
+    
 }
 
 // If tile borders empty space, moves tile and returns true, else returns false
 bool move(int tile)
 {
-    // TODO
+    int x, y;
+    for (int i = 0; i < d; i++)
+    {
+        for (int j = 0; j < d; j++)
+        {
+            if (board[i][j] == tile)
+            {
+                x = i;
+                y = j;
+            }
+        }
+    }
+    if (x > 0)
+    {
+        if (board[x - 1][y] == 0)
+        {
+            board[x - 1][y] = tile;
+            board[x][y] = 0;
+            return true;
+        }
+    }
+    if (y > 0)
+    {
+        if (board[x][y - 1] == 0)
+        {
+            board[x][y - 1] = tile;
+            board[x][y] = 0;
+            return true;
+        }
+    }
+    if (x < d - 1)
+    {
+        if (board[x + 1][y] == 0)
+        {
+            board[x + 1][y] = tile;
+            board[x][y] = 0;
+            return true;
+        }
+    }
+    if (y < d - 1)
+    {
+        if (board[x][y + 1] == 0)
+        {
+            board[x][y + 1] = tile;
+            board[x][y] = 0;
+            return true;
+        }
+    }
     return false;
 }
 
 // Returns true if game is won (i.e., board is in winning configuration), else false
 bool won(void)
 {
-    // TODO
-    return false;
+    for (int i = 0; i < d; i++)
+    {
+        for (int j = 0; j < d; j++)
+        {
+            if (board[i][j] != i * d + j + 1)
+            {
+                return false;
+            }
+        }
+    }
+    return true;
 }

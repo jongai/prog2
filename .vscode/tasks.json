@@ -1,0 +1,19 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Build with Clang",
+        "type": "shell",
+        "command": "clang",
+        "args": [
+          "${workspaceFolder}/${relativeFile}",
+          "-o",
+          "${workspaceFolder}/${relativeFileDirname}/${fileBasenameNoExtension} ",
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        }
+      }
+    ]
+  }
